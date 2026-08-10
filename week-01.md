@@ -39,7 +39,7 @@ The output showed `inet 10.10.1.1/24` under `eth0`, which confirmed that the sta
 
 The screenshot below shows my GNS3 project with one Linux Host node and my student details added to the workspace.
 
-![GNS3 project showing Host1 and student details](week-01/GNS3-Intro-12318349-network.png)
+![GNS3 project showing Host1 and student details](week-01/GNS3-Intro-12318349-ipaddress.png)
 
 ### IP address verification
 
