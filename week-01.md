@@ -1,4 +1,4 @@
-# Week 1 Portfolio â€“ Introduction to GNS3
+# Week 1 Portfolio  Introduction to GNS3
 
 **Name:** Ellen Gopali  
 **Student ID:** 12318349  
