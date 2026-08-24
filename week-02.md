@@ -170,15 +170,8 @@ ping 10.1.1.100
 
 If the destination does not exist or cannot be reached, no successful reply will be received. This test is useful for understanding packet loss and identifying connectivity problems.
 
-**Screenshot still required:** Add the screenshot of your ping to the incorrect/non-existing IP address here.
-
-![Ping to Wrong IP](week%202/week02-ping-error.png)
-
-```markdown
 
 
-**Figure 6: Ping test to an incorrect IP address.**
-```
 
 ---
 
@@ -212,13 +205,7 @@ ping -c 3 -s 80 10.1.1.2
 
 This allows me to control how many packets are sent and the amount of data included in the ping request.
 
-**Screenshot still required:** Add your screenshot after running a ping command with non-default options.
-![Ping Options](week%202/week02-ping-options.png)
-```markdown
 
-
-**Figure 7: Ping test using non-default command-line options.**
-```
 
 ---
 
