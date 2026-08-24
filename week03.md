@@ -75,8 +75,7 @@ ping -c 3 10.1.0.4
 
 Again, all three packets were successfully received.
 
-![Ping Connectivity Test](week03-ping-hosts.png)
-
+![Ping Connectivity Test](week-03/week03-ping-hosts.png)
 **Figure 2: Testing connectivity from Host1 to the other Linux hosts.**
 
 The successful results confirmed that the hosts could communicate with each other before I continued with application-level communication.
@@ -204,7 +203,7 @@ and the default gateway:
 10.162.32.1
 ```
 
-![Windows IP Configuration](week03-windows-ip.png)
+![Windows IP Configuration 1](week-03/week03-windows-ip.png)
 
 **Figure 3: Checking the Windows network configuration using Get-NetIPConfiguration.**
 
@@ -226,7 +225,7 @@ The destination successfully responded to the connection test.
 
 The results showed response times between approximately `1 ms` and `3 ms`.
 
-![Windows Test Connection](week03-test-connection.png)
+![Windows Test Connection](week-03/week03-test-connection.png)
 
 **Figure 4: Testing network connectivity using PowerShell Test-Connection.**
 
