@@ -14,7 +14,7 @@ The aim of this task was to learn different ways of configuring static IP addres
 I created a GNS3 project with four Linux hosts named **Host1, Host2, Host3 and Host4**. I connected all four hosts to **Switch1** to create a LAN.
 
 
-![Network Topology](week 2/week02-network-topology.png)
+![Network Topology](week%202/week02-network-topology.png)
 
 
 **Figure 1: GNS3 network topology with four Linux hosts connected to Switch1.**
