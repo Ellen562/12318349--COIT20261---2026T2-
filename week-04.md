@@ -2,7 +2,7 @@
 
 ## Overview
 
-In this week's practical, I configured a small network in GNS3 using two routers, a host, switches and a server. I configured the required IP addresses and routes, tested connectivity between the devices, accessed the web server from Host1, and analysed the HTTP traffic using Wireshark.
+In this week's practical, I configured a small network in GNS3 using two routers, a host, switches and a server. I configured the required IP addresses and static routes, tested the connectivity between the devices, accessed the web server and analysed the HTTP traffic using Wireshark.
 
 ---
 
@@ -16,7 +16,7 @@ The network used the following three subnets:
 - `10.1.2.0/24`
 - `10.1.3.0/24`
 
-![Week 4 Network Topology](week04-network-topology.png)
+![Week 4 Network Topology](week-04/week04-network-topology.png)
 
 ---
 
@@ -30,9 +30,9 @@ The routing table showed:
 - `10.1.2.0/24` connected through `eth1`
 - Route to `10.1.3.0/24` through Router2
 
-This allowed Router1 to forward traffic towards the server network.
+This allowed Router1 to forward traffic from the Host1 network towards the Server1 network.
 
-![Router1 IP and Route Configuration](week04-router1-ip-route.png)
+![Router1 IP and Route Configuration](week-04/week04-router1-ip-route.png)
 
 ---
 
@@ -47,7 +47,7 @@ Router2 was connected to:
 
 A route was also configured for the `10.1.1.0/24` network through Router1.
 
-![Router2 IP and Route Configuration](week04-router2-ip-route.png)
+![Router2 IP and Route Configuration](week-04/week04-router2-ip-route.png)
 
 ---
 
@@ -55,9 +55,9 @@ A route was also configured for the `10.1.1.0/24` network through Router1.
 
 Server1 was configured with the IP address `10.1.3.2/24` and the default gateway was set to `10.1.3.1`.
 
-I tested connectivity from Server1 to the network using ping. The successful replies confirmed that Server1 could communicate through the configured network.
+I tested connectivity from Server1 to the network using ping. The successful replies confirmed that Server1 could communicate with the routers.
 
-![Server1 Connectivity Test](week04-server1-connectivity.png)
+![Server1 Connectivity Test](week-04/week04-server1-connectivity.png)
 
 ---
 
@@ -67,7 +67,7 @@ Host1 was configured with the IP address `10.1.1.2/24` and used `10.1.1.1` as it
 
 I then pinged Server1 at `10.1.3.2`. The ping replies were successful with no packet loss. This confirmed that routing between the `10.1.1.0/24` and `10.1.3.0/24` networks was working correctly.
 
-![Host1 Ping to Server1](week04-host1-ping-server.png)
+![Host1 Ping to Server1](week-04/week04-host1-ping-server.png)
 
 ---
 
@@ -79,17 +79,17 @@ After confirming network connectivity, I opened Firefox on Host1 and entered:
 
 The Networkers' Toolkit webpage loaded successfully. This confirmed that Host1 could access the HTTP web server running on Server1 across the routed network.
 
-![Web Server Access from Host1](week04-host1-webpage.png)
+![Web Server Access from Host1](week-04/week04-host1-webpage.png)
 
 ---
 
 ## 7. HTTP GET Request Analysis
 
-I captured the traffic in Wireshark and applied the following display filter:
+I captured the network traffic using Wireshark and applied the following display filter:
 
 `http`
 
-I selected the HTTP GET packet sent from Host1 (`10.1.1.2`) to Server1 (`10.1.3.2`).
+I selected the HTTP request packet sent from Host1 (`10.1.1.2`) to Server1 (`10.1.3.2`).
 
 The packet showed:
 
@@ -100,15 +100,15 @@ The packet showed:
 - Request: `GET / HTTP/1.1`
 - Host: `10.1.3.2`
 
-This shows that Host1 requested the webpage from the web server using HTTP.
+This showed that Host1 requested the webpage from Server1 using HTTP.
 
-![HTTP GET Request](week04-http-get-request.png)
+![HTTP GET Request](week-04/week04-http-get-request.png)
 
 ---
 
 ## 8. HTTP 200 OK Response Analysis
 
-I then selected the response packet sent from Server1 back to Host1.
+I then selected the HTTP response packet sent from Server1 back to Host1.
 
 The packet showed:
 
@@ -118,12 +118,16 @@ The packet showed:
 - Status: `HTTP/1.1 200 OK`
 - Content-Type: `text/html`
 
-The `200 OK` response confirmed that the server successfully received the HTTP request and returned the webpage to Host1.
+The `200 OK` response confirmed that Server1 successfully received the HTTP request and returned the webpage to Host1.
 
-![HTTP 200 OK Response](week04-http-200-response.png)
+![HTTP 200 OK Response](week-04/week04-http-200-response.png)
 
 ---
 
 ## Reflection
 
-This practical helped me understand how devices on different networks communicate through routers. I configured IP addresses and routing between three networks and tested the connection using ping. I also accessed a web server from Host1 and used Wireshark to observe the HTTP GET request and HTTP 200 OK response. This helped me understand how HTTP communication can be viewed and analysed at packet level.
+In this week's practical, I learned how devices on different networks can communicate through routers. I configured IP addresses and static routes between three different networks and tested the connection using ping.
+
+I also accessed an HTTP web server from Host1 and used Wireshark to examine the communication between the client and server. I was able to identify the HTTP GET request sent by Host1 and the `200 OK` response returned by Server1.
+
+This practical helped me better understand static routing, end-to-end network connectivity and how HTTP communication can be viewed at packet level using Wireshark.
