@@ -48,7 +48,7 @@ iface eth0 inet static
     netmask 255.255.255.0
 ```
 
-![Host3 Interface Configuration](week 2/week02-host3-interfaces.png)
+![Host3 Interface Configuration](week%202/week02-host3-interfaces.png)
 
 **Figure 2: Configuring the static IP address of Host3 using /etc/network/interfaces.**
 
@@ -72,7 +72,7 @@ I then checked the interface using:
 ip a
 ```
 
-![Host4 IP Address](week 2/week02-host4-ip.png)
+![Host4 IP Address](week%202/week02-host4-ip.png)
 
 **Figure 3: Host4 showing the configured IP address 10.1.1.4/24.**
 
@@ -98,7 +98,7 @@ ip a
 
 For example, I checked Host1 and confirmed that an IPv4 address was assigned to its `eth0` interface.
 
-![Host1 IP Address](week 2/week02-host1-ip.png)
+![Host1 IP Address](week%202/week02-host1-ip.png)
 
 **Figure 4: Checking the IP configuration of Host1 using the ip a command.**
 
@@ -126,7 +126,7 @@ ping 10.1.1.2
 
 The destination host responded successfully.
 
-![Successful Ping](week 2/week02-ping-success.png)
+![Successful Ping](week%202/week02-ping-success.png)
 
 **Figure 5: Successful ping test to 10.1.1.2.**
 
