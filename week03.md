@@ -168,15 +168,11 @@ Get-NetIPConfiguration
 
 This displayed information about the Windows network interfaces, including the VirtualBox Host-Only Ethernet Adapter and the physical Ethernet interface.
 
-![Windows IP Configuration](week-03/week03-windows-ip-1.png)
+![Windows IP Configuration](week-03/week03-windows-ip.png)
 
 **Figure 5: Checking the Windows network configuration using PowerShell.**
 
-I also checked additional network interface information.
 
-![Windows Network Information](week-03/week03-windows-ip-2.png)
-
-**Figure 6: Additional Windows network configuration information.**
 
 I then tested connectivity from Windows using:
 
@@ -188,7 +184,7 @@ The destination successfully responded to the connection test.
 
 ![Windows Test Connection](week-03/week03-test-connection.png)
 
-**Figure 7: Testing network connectivity using PowerShell Test-Connection.**
+**Figure 6: Testing network connectivity using PowerShell Test-Connection.**
 
 ---
 
