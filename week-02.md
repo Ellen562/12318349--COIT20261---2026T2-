@@ -13,7 +13,7 @@ The aim of this task was to learn different ways of configuring static IP addres
 
 I created a GNS3 project with four Linux hosts named **Host1, Host2, Host3 and Host4**. I connected all four hosts to **Switch1** to create a LAN.
 
-![Network Topology](week02-network-topology.png)
+![Network Topology](week 2/week02-network-topology.png)
 
 **Figure 1: GNS3 network topology with four Linux hosts connected to Switch1.**
 
@@ -46,7 +46,7 @@ iface eth0 inet static
     netmask 255.255.255.0
 ```
 
-![Host3 Interface Configuration](week02-host3-interfaces.png)
+![Host3 Interface Configuration](week 2/week02-host3-interfaces.png)
 
 **Figure 2: Configuring the static IP address of Host3 using /etc/network/interfaces.**
 
@@ -70,7 +70,7 @@ I then checked the interface using:
 ip a
 ```
 
-![Host4 IP Address](week02-host4-ip.png)
+![Host4 IP Address](week 2/week02-host4-ip.png)
 
 **Figure 3: Host4 showing the configured IP address 10.1.1.4/24.**
 
@@ -96,7 +96,7 @@ ip a
 
 For example, I checked Host1 and confirmed that an IPv4 address was assigned to its `eth0` interface.
 
-![Host1 IP Address](week02-host1-ip.png)
+![Host1 IP Address](week 2/week02-host1-ip.png)
 
 **Figure 4: Checking the IP configuration of Host1 using the ip a command.**
 
@@ -124,7 +124,7 @@ ping 10.1.1.2
 
 The destination host responded successfully.
 
-![Successful Ping](week02-ping-success.png)
+![Successful Ping](week 2/week02-ping-success.png)
 
 **Figure 5: Successful ping test to 10.1.1.2.**
 
@@ -222,7 +222,7 @@ This allows me to control how many packets are sent and the amount of data inclu
 
 From this week's tutorial, I learned how to build a simple LAN in GNS3 and configure static IPv4 addresses on Linux hosts.
 
-I practised different methods of assigning an IP address, including editing the `/etc/network/interfaces` file and using the `ip addr add` command. I also learned how to use `ip a` to check whether an address had been assigned correctly.
+I practiced different methods of assigning an IP address, including editing the `/etc/network/interfaces` file and using the `ip addr add` command. I also learned how to use `ip a` to check whether an address had been assigned correctly.
 
 The second task helped me understand how `ping` can be used to test connectivity between network devices. I learned that receiving ping replies confirms that the destination is reachable. I also learned how packet loss and round-trip time can provide useful information about network connectivity and delay.
 
