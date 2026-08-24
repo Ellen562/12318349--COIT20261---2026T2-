@@ -3,219 +3,182 @@
 
 ## Task 1: Simple Application Communications with Netcat
 
-### Aim
+### 1. Network Setup
 
-The aim of this task was to understand basic application communication using Netcat (`nc`). I also used the network created in the previous tutorial and checked the connectivity between the Linux hosts before working with Netcat.
+For this week's tutorial, I created a GNS3 network containing four Linux hosts named **Host1, Host2, Host3 and Host4**. All four hosts were connected to the same Ethernet switch.
 
----
+![Week 03 Network Topology](week-03/week03-network-topology.png)
 
-### 1. Checking the Network Configuration
+**Figure 1: Week 03 GNS3 network topology.**
 
-I used the GNS3 project containing four Linux hosts connected through an Ethernet switch.
+I configured the hosts using the following IPv4 addresses:
 
-Before testing communication, I checked the IP configuration of the hosts. The hosts were configured in the `10.1.0.0/24` network.
-
-For example, Host1 was configured with:
-
-```bash
-ip addr add 10.1.0.1/24 dev eth0
-```
-
-I then checked the configuration using:
-
-```bash
-ip a
-```
-
-The output confirmed that Host1 had the following IPv4 address:
-
-```text
-10.1.0.1/24
-```
-
-![Host1 IP Configuration](week03-host1-ip.png)
-
-**Figure 1: Checking the IP configuration of Host1.**
+| Host | IPv4 Address |
+|---|---|
+| Host1 | 10.1.0.1/24 |
+| Host2 | 10.1.0.2/24 |
+| Host3 | 10.1.0.3/24 |
+| Host4 | 10.1.0.4/24 |
 
 ---
 
-### 2. Testing Connectivity Between the Hosts
+### 2. Testing Connectivity
 
-Before using Netcat, I tested whether Host1 could communicate with the other hosts on the LAN.
+Before using Netcat, I checked whether Host1 could communicate with the other hosts.
 
-From Host1, I first tested Host2 using:
+From Host1, I used:
 
 ```bash
 ping -c 3 10.1.0.2
-```
-
-The result showed:
-
-```text
-3 packets transmitted, 3 received, 0% packet loss
-```
-
-I then tested Host3:
-
-```bash
 ping -c 3 10.1.0.3
-```
-
-The result also showed:
-
-```text
-3 packets transmitted, 3 received, 0% packet loss
-```
-
-Finally, I tested Host4:
-
-```bash
 ping -c 3 10.1.0.4
 ```
 
-Again, all three packets were successfully received.
+All three destinations responded successfully with `0% packet loss`.
 
 ![Ping Connectivity Test](week-03/week03-ping-hosts.png)
-**Figure 2: Testing connectivity from Host1 to the other Linux hosts.**
 
-The successful results confirmed that the hosts could communicate with each other before I continued with application-level communication.
+**Figure 2: Testing connectivity from Host1 to Host2, Host3 and Host4.**
+
+This confirmed that the IP configuration was working and the hosts could communicate through the switch.
 
 ---
 
-### 3. Netcat Client and Server Communication
+### 3. Starting the Netcat Server
 
-For this activity, Netcat was used to create simple communication between two Linux hosts.
+For the Netcat activity, I used **Host2 as the server**.
 
-One host was used as the Netcat server and another host was used as the client.
-
-On the server, Netcat can be started in listening mode using:
+I started Netcat in listening mode on port `12346` using:
 
 ```bash
-nc -l -p <port-number>
+nc -l -p 12346
 ```
 
-The tutorial required a port other than `12345`.
+I used port `12346` instead of the example port `12345`.
 
-On the client, the connection can be made using:
+After starting the server, it waited for an incoming connection from the Netcat client.
+
+![Netcat Server](week-03/Netcat-Basics-12318349-server.png)
+
+**Figure 3: Netcat server listening on port 12346.**
+
+---
+
+### 4. Connecting the Netcat Client
+
+I used **Host1 as the Netcat client**.
+
+Since Host2 was using the IP address `10.1.0.2`, I connected to the Netcat server using:
 
 ```bash
-nc <server-IP-address> <port-number>
+nc 10.1.0.2 12346
 ```
 
-After the connection was established, a text message containing my name was sent from the client to the server.
+After the connection was established, text messages could be exchanged between the client and server.
 
-The server could then send my student ID back to the client.
+![Netcat Client](week-03/Netcat-Basics-12318349-client.png)
 
-The information exchanged during the activity was:
+**Figure 4: Netcat client connected to Host2 on port 12346.**
+
+---
+
+### 5. Sending Messages Using Netcat
+
+After establishing the connection, I sent a name through the Netcat connection.
+
+The message sent was:
 
 ```text
-Name: Rohit
-Student ID: 12318349
+Ellen
 ```
 
-This activity demonstrated that Netcat can provide simple application-level communication between two network devices.
+The student ID sent through the connection was:
 
-Netcat is different from `ping` because `ping` uses ICMP to check network-level connectivity, while Netcat can use TCP or UDP for application communication.
+```text
+12318349
+```
+
+Both messages appeared on the connected consoles, confirming that the Netcat client and server were communicating successfully.
+
+This activity showed that Netcat can be used to test simple application-level communication between two hosts using a specified port.
 
 ---
 
 ## Task 2: Capturing Packets
 
-### Aim
+### 1. Starting Packet Capture
 
-The aim of this task was to capture network packets travelling across a GNS3 link and save the captured traffic as a `.pcap` file.
+For the second task, I captured network traffic travelling between a Linux host and the Ethernet switch.
 
----
+I started the packet capture on the link between Host1 and Switch1 in GNS3.
 
-### 1. Starting the Packet Capture
-
-I started a packet capture on the link between Host1 and the Ethernet switch in GNS3.
-
-The capture was started by right-clicking the required network link and selecting:
-
-```text
-Start capture
-```
-
-The Ethernet link type was selected and the capture was saved in `.pcap` format.
+The capture was configured as an Ethernet capture and saved in `.pcap` format.
 
 ---
 
 ### 2. Generating Ping Traffic
 
-While the packet capture was running, I generated network traffic using `ping`.
+While the packet capture was running, I generated ICMP traffic by sending three ping requests.
 
-From Host1, I sent three ICMP requests to another host using:
+The command used was:
 
 ```bash
 ping -c 3 10.1.0.2
 ```
 
-The result showed:
+The successful ping responses confirmed that Host1 could communicate with Host2.
 
-```text
-3 packets transmitted
-3 packets received
-0% packet loss
-```
-
-This generated ICMP request and reply packets that could be recorded in the packet capture.
+The ping traffic generated ICMP Echo Request and Echo Reply packets that could be recorded in the packet capture.
 
 ---
 
 ### 3. Generating Netcat Traffic
 
-Netcat communication was also used while the packet capture was active.
+I also used Netcat while capturing network traffic.
 
-A Netcat connection was established between two hosts and a text message was sent through the connection.
+Netcat created application-level communication between the hosts using TCP and the selected port.
 
-This generated application communication that could also be recorded in the `.pcap` file.
-
-After generating the required traffic, I stopped the packet capture in GNS3.
+This allowed the packet capture to contain both basic network connectivity traffic from `ping` and application communication generated using Netcat.
 
 ---
 
-### 4. Checking the Windows Host Network Configuration
+### 4. Saving the Packet Capture
 
-I also checked the network configuration of the Windows host using PowerShell.
+After generating the required traffic, I stopped the packet capture.
 
-I entered:
+The capture was saved as a `.pcap` file so that the packets could be opened and analysed later using Wireshark.
+
+The capture file was saved as:
+
+```text
+Capture-Basics-12318349-ping-netcat.pcap
+```
+
+---
+
+## Additional Network Testing
+
+I also checked the Windows network configuration using PowerShell.
+
+The command used was:
 
 ```powershell
 Get-NetIPConfiguration
 ```
 
-The output showed the VirtualBox Host-Only Ethernet Adapter with the IPv4 address:
+This displayed information about the Windows network interfaces, including the VirtualBox Host-Only Ethernet Adapter and the physical Ethernet interface.
 
-```text
-192.168.56.1
-```
+![Windows IP Configuration](week-03/week03-windows-ip-1.png)
 
-It also showed the physical Ethernet interface with the IPv4 address:
+**Figure 5: Checking the Windows network configuration using PowerShell.**
 
-```text
-10.162.33.49
-```
+I also checked additional network interface information.
 
-and the default gateway:
+![Windows Network Information](week-03/week03-windows-ip-2.png)
 
-```text
-10.162.32.1
-```
+**Figure 6: Additional Windows network configuration information.**
 
-![Windows IP Configuration 1](week-03/week03-windows-ip.png)
-
-**Figure 3: Checking the Windows network configuration using Get-NetIPConfiguration.**
-
-This helped me identify the network interfaces and addresses being used by the Windows host and VirtualBox environment.
-
----
-
-### 5. Testing Connectivity from Windows
-
-I also used PowerShell to test network connectivity.
-
-The command used was:
+I then tested connectivity from Windows using:
 
 ```powershell
 Test-Connection 10.162.33.135
@@ -223,44 +186,20 @@ Test-Connection 10.162.33.135
 
 The destination successfully responded to the connection test.
 
-The results showed response times between approximately `1 ms` and `3 ms`.
-
 ![Windows Test Connection](week-03/week03-test-connection.png)
 
-**Figure 4: Testing network connectivity using PowerShell Test-Connection.**
-
-This confirmed that the destination device was reachable from the Windows computer.
-
----
-
-### 6. Saving the Packet Capture
-
-After completing the network communication tests, I stopped the packet capture.
-
-The captured traffic was transferred from the GNS3 environment to the Windows host and saved as a `.pcap` file.
-
-My capture file was:
-
-```text
-12318349-ping-netcat.pcap
-```
-
-The capture contains the network traffic generated during the ping and Netcat activities.
-
-The `.pcap` file can be opened using Wireshark to inspect the captured packets.
+**Figure 7: Testing network connectivity using PowerShell Test-Connection.**
 
 ---
 
 ## What I Learned
 
-In this week's tutorial, I learned the difference between network-level and application-level communication.
+In this week's tutorial, I learned how to use different tools to test communication between network devices.
 
-I used `ping` to check whether the Linux hosts could communicate with each other. Receiving all the ping responses with `0% packet loss` confirmed that the IP configuration and basic network connectivity were working correctly.
+I first used `ping` to confirm that the Linux hosts could communicate with each other. The successful results with `0% packet loss` showed that the IP addresses and network connections were working correctly.
 
-I also learned how Netcat can be used to establish simple communication between a client and server. Unlike ping, which uses ICMP, Netcat allows messages to be exchanged between applications using a specified port.
+I then used Netcat to create simple client-server communication. I learned how one host can listen on a specific port while another host connects to that IP address and port. After the connection was established, text messages could be exchanged between the two hosts.
 
-The packet capture activity also helped me understand that traffic passing through a network link can be recorded in a `.pcap` file. This file can later be opened in Wireshark for further analysis.
+I also learned how network traffic can be captured in GNS3 and saved as a `.pcap` file. The capture can later be opened in Wireshark to inspect the packets in more detail.
 
-I also practised using PowerShell commands such as `Get-NetIPConfiguration` and `Test-Connection` to check the Windows host's network configuration and connectivity.
-
-Overall, this tutorial helped me understand how different network testing tools can be used together to configure, test and observe network communication.
+Overall, this tutorial helped me understand the difference between using `ping` for basic network connectivity testing and using Netcat for application-level communication.
