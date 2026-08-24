@@ -211,7 +211,7 @@ ping -c 3 -s 80 10.1.1.2
 This allows me to control how many packets are sent and the amount of data included in the ping request.
 
 **Screenshot still required:** Add your screenshot after running a ping command with non-default options.
-![Ping Options](week-02/week02-ping-options.png)
+[![Ping Options](week 2/week02-ping-options.png)](https://github.com/Ellen562/12318349--COIT20261---2026T2-/blob/9dc2fe78e5842afc2982f4e1a390e4450dcb883f/week%202/week02-ping-success.png)
 ```markdown
 
 
